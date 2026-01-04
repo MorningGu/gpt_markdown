@@ -227,11 +227,18 @@ class HTag extends BlockMd {
               style: TextStyle(fontSize: 0, height: 0),
             ),
             WidgetSpan(
-              child: CustomDivider(
+              child: Container(
+                width: double.infinity,
+                // 这里的 height 是指组件占用的总高度（含边距效果）
                 height: theme.hrLineThickness,
-                color:
-                    config.style?.color ??
-                    Theme.of(context).colorScheme.outline,
+                alignment: Alignment.center,
+                child: Container(
+                  // 这才是中间那条线
+                  height: theme.hrLineThickness,
+                  color:
+                      config.style?.color ??
+                      Theme.of(context).colorScheme.outline,
+                ),
               ),
             ),
           ],
@@ -273,9 +280,16 @@ class HrLine extends BlockMd {
   ) {
     var thickness = GptMarkdownTheme.of(context).hrLineThickness;
     var color = GptMarkdownTheme.of(context).hrLineColor;
-    return CustomDivider(
+    return Container(
+      width: double.infinity,
+      // 这里的 height 是指组件占用的总高度（含边距效果）
       height: thickness,
-      color: config.style?.color ?? color,
+      alignment: Alignment.center,
+      child: Container(
+        // 这才是中间那条线
+        height: thickness,
+        color: config.style?.color ?? color,
+      ),
     );
   }
 }
