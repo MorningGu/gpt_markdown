@@ -83,6 +83,23 @@ class RenderDivider extends RenderBox {
 
   // --- 关键修复部分开始 ---
 
+  // --- 新增这个方法来修复 Baseline 报错 ---
+  @override
+  double? computeDryBaseline(
+    BoxConstraints constraints,
+    TextBaseline baseline,
+  ) {
+    // 分割线没有文字基线，返回 null 告诉父级不要基于基线对齐此组件
+    return null;
+  }
+
+  // 顺便确保这个方法也重写了（这是 getDryBaseline 的基础）
+  @override
+  double? computeDistanceToActualBaseline(TextBaseline baseline) {
+    return null;
+  }
+  // ------------------------------------
+
   @override
   double computeMinIntrinsicHeight(double width) => _height;
 
