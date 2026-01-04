@@ -81,6 +81,22 @@ class RenderDivider extends RenderBox {
     markNeedsLayout();
   }
 
+  // --- 关键修复部分开始 ---
+
+  @override
+  double computeMinIntrinsicHeight(double width) => _height;
+
+  @override
+  double computeMaxIntrinsicHeight(double width) => _height;
+
+  @override
+  double computeMinIntrinsicWidth(double height) => 0.0;
+
+  @override
+  double computeMaxIntrinsicWidth(double height) => double.infinity;
+
+  // --- 关键修复部分结束 ---
+
   @override
   Size computeDryLayout(BoxConstraints constraints) {
     return BoxConstraints.tightFor(
